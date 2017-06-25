@@ -60,18 +60,12 @@ public class WekaTest {
         for (int i = 0; i < test.numInstances(); i++) {
             double pred = fc.classifyInstance(test.instance(i));
             System.out.print("ID: " + test.instance(i).value(0));
-            System.out.print(", actual: " + test.classAttribute().value((int) test.instance(i).classValue()));
-            System.out.println(", predicted: " + test.classAttribute().value((int) pred));
+            System.out.print(", real: " + test.classAttribute().value((int) test.instance(i).classValue()));
+            System.out.println(", predecido: " + test.classAttribute().value((int) pred));
           }
         
         
     }
     
-    public static void crearJ48(Instances data) throws Exception{
-        String[] options = new String[1];
-        options[0] = "-U";
-        
-        
-        
-    }
+    
 }
