@@ -35,7 +35,7 @@ public class WekaTest {
         
         data.setClassIndex(data.numAttributes()-1);
        
-        int trainSize = (int) Math.round(data.numInstances() * 66 / 100);
+        int trainSize = (int) Math.round(data.numInstances() * 77 / 100);
         int testSize = data.numInstances() - trainSize;
         Instances train = new Instances(data, 0, trainSize);
         Instances test = new Instances(data, trainSize, testSize);
