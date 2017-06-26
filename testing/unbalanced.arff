@@ -1,0 +1,37 @@
+@relation unbalanced
+
+@attribute WBN_GC_L_0.25 numeric
+@attribute WBN_GC_H_0.25 numeric
+@attribute WBN_GC_L_0.50 numeric
+@attribute WBN_GC_H_0.50 numeric
+@attribute WBN_GC_L_0.75 numeric
+@attribute WBN_GC_H_0.75 numeric
+@attribute WBN_GC_L_1.00 numeric
+@attribute WBN_GC_H_1.00 numeric
+@attribute WBN_EN_L_0.25 numeric
+@attribute WBN_EN_H_0.25 numeric
+@attribute WBN_EN_L_0.50 numeric
+@attribute WBN_EN_H_0.50 numeric
+@attribute WBN_EN_L_0.75 numeric
+@attribute WBN_EN_H_0.75 numeric
+@attribute WBN_EN_L_1.00 numeric
+@attribute WBN_EN_H_1.00 numeric
+@attribute WBN_LP_L_0.25 numeric
+@attribute WBN_LP_H_0.25 numeric
+@attribute WBN_LP_L_0.50 numeric
+@attribute WBN_LP_H_0.50 numeric
+@attribute WBN_LP_L_0.75 numeric
+@attribute WBN_LP_H_0.75 numeric
+@attribute WBN_LP_L_1.00 numeric
+@attribute WBN_LP_H_1.00 numeric
+@attribute XLogP numeric
+@attribute PSA numeric
+@attribute NumRot numeric
+@attribute NumHBA numeric
+@attribute NumHBD numeric
+@attribute MW numeric
+@attribute BBB numeric
+@attribute BadGroup numeric
+@attribute Outcome {Active,Inactive}
+
+@data

@@ -8,14 +8,14 @@ package proyectodemineria;
 import weka.classifiers.Classifier;
 import weka.classifiers.functions.SMO;
 import weka.core.Attribute;
-import weka.core.FastVector;
 import weka.core.Instance;
-import weka.core.Instances;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.StringToWordVector;import java.util.logging.Level;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.meta.FilteredClassifier;
+import weka.classifiers.trees.J48;
 import weka.core.DenseInstance;
+import weka.filters.unsupervised.attribute.Remove;
 
 /**
  *
@@ -55,7 +55,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSlider2 = new javax.swing.JSlider();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -130,13 +129,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Classify");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -148,8 +140,6 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(114, 114, 114)
                         .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,8 +175,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 11, Short.MAX_VALUE))
@@ -236,17 +225,16 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         archivo = String.valueOf(jComboBox1.getSelectedItem());
         String algoritmo = String.valueOf(jComboBox2.getSelectedItem());
-        int porcentaje = jSlider2.getValue();
         if (algoritmo.equalsIgnoreCase("j48 tree")){
             try {
-                String result = wt.classifyJ48(archivo, porcentaje);
+                String result = wt.classifyJ48(archivo);
                 jTextArea1.setText(result);
             } catch (Exception ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if(algoritmo.equalsIgnoreCase("naive bayes")){
             try {
-                String result = wt.classifyNaiveBayes(archivo,porcentaje);
+                String result = wt.classifyNaiveBayes(archivo);
                 jTextArea1.setText(result);
             } catch (Exception ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -261,31 +249,6 @@ public class MainFrame extends javax.swing.JFrame {
         dialog.setFilename(jComboBox1.getName());
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        final Classifier classifier = new SMO(); 
-        
-        Attribute age  = new Attribute("age");
-        Attribute spect  = new Attribute("spectacle-prescrip");
-        Attribute astig  = new Attribute("astigmatism");
-        Attribute tear  = new Attribute("tear-prod-rate");
-        
-        Instance inst = new DenseInstance(5);
-        
-        
-        inst.setValue( age, "young");
-        inst.setValue( spect, "myope");
-        inst.setValue(astig, "yes");
-        inst.setValue(tear, "reduced");
-        inst.setClassValue("contact-lenses");
-        
-        Classifier cModel = (Classifier)new NaiveBayes();
-        try {
-            System.out.println(cModel.classifyInstance(inst));
-        } catch (Exception ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -325,7 +288,6 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JDialog jDialog1;

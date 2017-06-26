@@ -1,0 +1,7 @@
+@relation points
+
+@attribute X numeric
+@attribute Y numeric
+@attribute class {a, b}
+
+@data

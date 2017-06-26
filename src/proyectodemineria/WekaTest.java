@@ -13,7 +13,10 @@ import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.trees.J48;
+import weka.core.Instance;
 import weka.core.Instances;
+import static weka.core.Instances.test;
+import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.unsupervised.attribute.Remove;
 
 /**
@@ -49,62 +52,74 @@ public class WekaTest {
         eval.evaluateModel(cls, test);
         System.out.println(eval.toSummaryString("\nResults\n======\n", false));
         
-        /*Remove rm = new Remove();
-        rm.setAttributeIndices("1");  // remove 1st attribute
-        // classifier
-        J48 j48 = new J48();
-        j48.setUnpruned(true);        // using an unpruned J48
-        // meta-classifier
-        FilteredClassifier fc = new FilteredClassifier();
-        fc.setFilter(rm);
-        fc.setClassifier(j48);
-        // train and make predictions
-        fc.buildClassifier(train);
-        for (int i = 0; i < test.numInstances(); i++) {
-            double pred = fc.classifyInstance(test.instance(i));
-            System.out.print("ID: " + test.instance(i).value(0));
-            System.out.print(", real: " + test.classAttribute().value((int) test.instance(i).classValue()));
-            System.out.println(", predecido: " + test.classAttribute().value((int) pred));
-          }
-        */
+        
+        
     }
     
-    public String classifyJ48(String datafile, int porcentaje) throws IOException, Exception{
-        Instances data;
-        try (BufferedReader datum = readDatafile(datafile)) {
-            data = new Instances(datum);
+    public String classifyJ48(String datafile) throws IOException, Exception{
+        DataSource source = new DataSource("training/" + datafile);
+        Instances trainingset = source.getDataSet();
+        trainingset.setClassIndex(trainingset.numAttributes()-1);
+        Classifier cls = new J48();
+        cls.buildClassifier(trainingset);
+        
+        DataSource source1 = new DataSource("testing/" + datafile);
+        Instances testDataset = source1.getDataSet();
+        testDataset.setClassIndex(testDataset.numAttributes()-1);
+        Evaluation eval = new Evaluation(trainingset);
+        eval.evaluateModel(cls, testDataset);
+        
+        String results="";
+        results+="===================\n";
+        results+="Actual Class, J48 Predicted\n";
+        for (int i = 0; i < testDataset.numInstances(); i++) {
+                //get class double value for current instance
+                double actualValue = testDataset.instance(i).classValue();
+
+                //get Instance object of current instance
+                Instance newInst = testDataset.instance(i);
+                //call classifyInstance, which returns a double value for the class
+                double predJ48 = cls.classifyInstance(newInst);
+
+                results += "Real: " + testDataset.classAttribute().value((int) testDataset.instance(i).classValue()) + ". Predicted:" +  testDataset.classAttribute().value((int) predJ48) + "\n";
         }
         
-        data.setClassIndex(data.numAttributes()-1);
-       
-        int trainSize = (int) Math.round(data.numInstances() * porcentaje / 100);
-        int testSize = data.numInstances() - trainSize;
-        Instances train = new Instances(data, 0, trainSize);
-        Instances test = new Instances(data, trainSize, testSize);
-        Classifier cls = new J48();
-        cls.buildClassifier(train);
-        Evaluation eval = new Evaluation(train);
-        eval.evaluateModel(cls, test);
-        String results = eval.toSummaryString("\nResults\n======\n", false);
+        results += eval.toSummaryString("\nResults\n======\n", false);
+        
+        
         return results;
     }
-    public String classifyNaiveBayes(String datafile, int porcentaje) throws IOException, Exception{
-        Instances data;
-        try (BufferedReader datum = readDatafile(datafile)) {
-            data = new Instances(datum);
+    public String classifyNaiveBayes(String datafile) throws IOException, Exception{
+        DataSource source = new DataSource("training/" + datafile);
+        Instances trainingset = source.getDataSet();
+        trainingset.setClassIndex(trainingset.numAttributes()-1);
+        Classifier cls = new NaiveBayes();
+        cls.buildClassifier(trainingset);
+        
+        DataSource source1 = new DataSource("testing/" + datafile);
+        Instances testDataset = source1.getDataSet();
+        testDataset.setClassIndex(testDataset.numAttributes()-1);
+        Evaluation eval = new Evaluation(trainingset);
+        eval.evaluateModel(cls, testDataset);
+        
+        String results="";
+        results+="===================\n";
+        results+="Actual Class    | Naive Bayes Predicted\n";
+        for (int i = 0; i < testDataset.numInstances(); i++) {
+                //get class double value for current instance
+                double actualValue = testDataset.instance(i).classValue();
+
+                //get Instance object of current instance
+                Instance newInst = testDataset.instance(i);
+                //call classifyInstance, which returns a double value for the class
+                double predNB = cls.classifyInstance(newInst);
+
+                results += "Real: " + testDataset.classAttribute().value((int) testDataset.instance(i).classValue()) + ". Predicted:" +  testDataset.classAttribute().value((int) predNB) + "\n";
         }
         
-        data.setClassIndex(data.numAttributes()-1);
-       
-        int trainSize = (int) Math.round(data.numInstances() * porcentaje / 100);
-        int testSize = data.numInstances() - trainSize;
-        Instances train = new Instances(data, 0, trainSize);
-        Instances test = new Instances(data, trainSize, testSize);
-        Classifier cls = new NaiveBayes();
-        cls.buildClassifier(train);
-        Evaluation eval = new Evaluation(train);
-        eval.evaluateModel(cls, test);
-        String results = eval.toSummaryString("\nResults\n======\n", false);
+        results += eval.toSummaryString("\nResults\n======\n", false);
+        
+        
         return results;
     }
     

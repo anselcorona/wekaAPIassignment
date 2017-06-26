@@ -100,9 +100,9 @@ public class NewJDialog extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(MainFrame.archivo, true));
-            output.write(jTextField1.getText() + "\n");
-            output.close();
+            try (BufferedWriter output = new BufferedWriter(new FileWriter("testing/"+MainFrame.archivo, true))) {
+                output.write(jTextField1.getText() + "\n");
+            }
            
         } catch (IOException ex) {
             Logger.getLogger(NewJDialog.class.getName()).log(Level.SEVERE, null, ex);
