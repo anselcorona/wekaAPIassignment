@@ -4,3 +4,22 @@
 @ATTRIBUTE sex {"male","female"}
 @ATTRIBUTE survived {"yes","no"}
 @DATA
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,yes
+crew,adult,female,no
+crew,adult,female,no
+crew,adult,female,no

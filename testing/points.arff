@@ -5,3 +5,5 @@
 @attribute class {a, b}
 
 @data
+-2,1,b
+0,2,b
