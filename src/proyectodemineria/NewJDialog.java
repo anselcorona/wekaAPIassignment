@@ -5,7 +5,9 @@
  */
 package proyectodemineria;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -98,8 +100,10 @@ public class NewJDialog extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(getFilename(), true));
-            output.append(jTextField1.getText());
+            BufferedWriter output = new BufferedWriter(new FileWriter(MainFrame.archivo, true));
+            output.write(jTextField1.getText() + "\n");
+            output.close();
+           
         } catch (IOException ex) {
             Logger.getLogger(NewJDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
