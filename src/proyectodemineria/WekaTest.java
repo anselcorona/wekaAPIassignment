@@ -13,6 +13,7 @@ import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.trees.J48;
+import weka.classifiers.trees.RandomForest;
 import weka.core.Instance;
 import weka.core.Instances;
 import static weka.core.Instances.test;
@@ -115,6 +116,39 @@ public class WekaTest {
                 double predNB = cls.classifyInstance(newInst);
 
                 results += "Real: " + testDataset.classAttribute().value((int) testDataset.instance(i).classValue()) + ". Predicted:" +  testDataset.classAttribute().value((int) predNB) + "\n";
+        }
+        
+        results += eval.toSummaryString("\nResults\n======\n", false);
+        
+        
+        return results;
+    }
+    public String classifyRandomForest(String datafile) throws IOException, Exception{
+        DataSource source = new DataSource("training/" + datafile);
+        Instances trainingset = source.getDataSet();
+        trainingset.setClassIndex(trainingset.numAttributes()-1);
+        Classifier cls = new RandomForest();
+        cls.buildClassifier(trainingset);
+        
+        DataSource source1 = new DataSource("testing/" + datafile);
+        Instances testDataset = source1.getDataSet();
+        testDataset.setClassIndex(testDataset.numAttributes()-1);
+        Evaluation eval = new Evaluation(trainingset);
+        eval.evaluateModel(cls, testDataset);
+        
+        String results="";
+        results+="===================\n";
+        results+="Actual Class    | Random Forest Predicted\n";
+        for (int i = 0; i < testDataset.numInstances(); i++) {
+                //get class double value for current instance
+                double actualValue = testDataset.instance(i).classValue();
+
+                //get Instance object of current instance
+                Instance newInst = testDataset.instance(i);
+                //call classifyInstance, which returns a double value for the class
+                double predRF = cls.classifyInstance(newInst);
+
+                results += "Real: " + testDataset.classAttribute().value((int) testDataset.instance(i).classValue()) + ". Predicted:" +  testDataset.classAttribute().value((int) predRF) + "\n";
         }
         
         results += eval.toSummaryString("\nResults\n======\n", false);

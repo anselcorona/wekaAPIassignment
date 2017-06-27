@@ -87,7 +87,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Elija su archivo: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "contact-lenses.arff", "flags.arff", "iris.arff", "points.arff", "supermarket.arff", "titanic.arff", "unbalanced.arff", "vote.arff", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "contact-lenses.arff", "flags.arff", "iris.arff", "points.arff", "supermarket.arff", "titanic.arff", "unbalanced.arff", "vote.arff" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -100,7 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Elija el algoritmo de clasificacion: ");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "J48 Tree", "Naive Bayes" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "J48 Tree", "Naive Bayes", "RandomForest" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -114,7 +114,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Porcentaje entretenamiento:");
+        jLabel3.setText("Fidget Spinner:");
 
         jSlider2.setMajorTickSpacing(5);
         jSlider2.setMaximum(80);
@@ -235,6 +235,13 @@ public class MainFrame extends javax.swing.JFrame {
         } else if(algoritmo.equalsIgnoreCase("naive bayes")){
             try {
                 String result = wt.classifyNaiveBayes(archivo);
+                jTextArea1.setText(result);
+            } catch (Exception ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }   else if(algoritmo.equalsIgnoreCase("randomforest")){
+            try {
+                String result = wt.classifyRandomForest(archivo);
                 jTextArea1.setText(result);
             } catch (Exception ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);

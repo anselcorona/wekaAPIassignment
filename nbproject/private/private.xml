@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/anselcorona/NetBeansProjects/ProyectoDeMineria/src/proyectodemineria/WekaTest.java</file>
-            <file>file:/Users/anselcorona/NetBeansProjects/ProyectoDeMineria/src/proyectodemineria/NewJDialog.java</file>
             <file>file:/Users/anselcorona/NetBeansProjects/ProyectoDeMineria/src/proyectodemineria/MainFrame.java</file>
+            <file>file:/Users/anselcorona/NetBeansProjects/ProyectoDeMineria/testing/flags.arff</file>
+            <file>file:/Users/anselcorona/NetBeansProjects/ProyectoDeMineria/testing/vote.arff</file>
+            <file>file:/Users/anselcorona/NetBeansProjects/ProyectoDeMineria/testing/contact-lenses.arff</file>
         </group>
     </open-files>
 </project-private>

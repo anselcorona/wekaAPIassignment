@@ -168,7 +168,7 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="9">
+              <StringArray count="8">
                 <StringItem index="0" value="contact-lenses.arff"/>
                 <StringItem index="1" value="flags.arff"/>
                 <StringItem index="2" value="iris.arff"/>
@@ -177,7 +177,6 @@
                 <StringItem index="5" value="titanic.arff"/>
                 <StringItem index="6" value="unbalanced.arff"/>
                 <StringItem index="7" value="vote.arff"/>
-                <StringItem index="8" value=" "/>
               </StringArray>
             </Property>
           </Properties>
@@ -208,9 +207,10 @@
         <Component class="javax.swing.JComboBox" name="jComboBox2">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="3">
                 <StringItem index="0" value="J48 Tree"/>
                 <StringItem index="1" value="Naive Bayes"/>
+                <StringItem index="2" value="RandomForest"/>
               </StringArray>
             </Property>
           </Properties>
@@ -228,7 +228,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Porcentaje entretenamiento:"/>
+            <Property name="text" type="java.lang.String" value="Fidget Spinner:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSlider" name="jSlider2">
